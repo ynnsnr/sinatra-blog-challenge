@@ -1,0 +1,130 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,400,700);
+
+body {
+  background: #fbfbfb;
+  font-family: 'Roboto';
+  color:#777;
+}
+
+h1, h4 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.banner {
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+  url('https://unsplash.com/photos/L6U2dDSW_fw');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 80px 0 70px 0;
+  .banner-link {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+  }
+}
+
+.title {
+  color: white;
+  p {
+    font-size: 16px;
+  }
+}
+
+.row {
+  padding:50px 0;
+  background:white;
+}
+
+.seperator {
+  margin-bottom: 16px;
+  width:35px;
+  height:3px;
+  background: #777;
+}
+
+.title{
+  .row{
+    padding: 50px 0 0;
+  }
+  .seperator{
+    margin: 0 auto 10px;
+    background:white;
+  }
+}
+
+.item {
+  position: relative;
+  margin-bottom: 30px;
+  user-select: none;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  h4 {
+    margin-top: 25px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  p {
+    font-size: 14px;
+    font-weight: 100;
+  }
+  .img {
+    background-size: cover !important;
+    background-position: center !important;
+    height: 225px;
+  }
+  .item-in {
+    background: #fff;
+    padding: 0px 32px 24px 32px;
+    min-height: 225px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // &:hover:before {
+    //     width: 100%;
+    //   }
+    //   &::before {
+    //   content: "";
+    //   position: absolute;
+    //   bottom: 0px;
+    //   height: 2px;
+    //   width: 0%;
+    //   background: #333333;
+    //   right: 0px;
+    //   transition: width 0.4s;
+    //   }
+  }
+  .item-link {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background: black;
+    opacity: 0;
+    transition: all 500ms;
+    &:hover {
+      opacity: 0.1;
+    }
+  }
+}
+
+.footer {
+  padding: 10px 0 0 6px;
+  font-size: 30px;
+  letter-spacing: 16px;
+  background-color: #263238;
+  height: 64px;
+  a {
+    color: lightgray;
+    &:hover {
+      color: white;
+    }
+  }
+}

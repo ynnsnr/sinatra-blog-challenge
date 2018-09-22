@@ -1,0 +1,22 @@
+<img src="<%= @article[:photo] %>" alt="">
+<br>
+<h1><%= @article[:title] %></h1>
+<br>
+<p><%= @article[:content] %></p>
+<br><p>
+<% if @article[:rating] %>
+  <% @article[:rating].to_i.times do %>
+    <i class="fas fa-star"></i>
+  <% end %>
+  <% (5 - @article[:rating].to_i).times do %>
+    <i class="far fa-star"></i>
+  <% end %>
+<% else %>
+  No reviews yet
+<% end %></p>
+<hr>
+<h4>COMMENTS:</h4>
+
+<% @comments[params.fetch('id').to_i - 1].each do |comment| %>
+  <p><%= comment %></p>
+<% end %>
