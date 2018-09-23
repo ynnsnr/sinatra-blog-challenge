@@ -1,57 +1,50 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-1 col-sm-offset-1 col-md-8 col-md-offset-1 col-lg-8 col-lg-offset-1">
-    <% @database.reverse.each_with_index do |article, index| %>
-      <div class="item">
-        <div class="row" style="margin: 0; padding: 0;">
-          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 img" style="background: url(<%= article[:photo] ? article[:photo] : 'https://source.unsplash.com/random' %>)">
+<% @articles.reverse.each_with_index do |article, index| %>
+  <div class="item">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 img" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+      url(<%= article[:photo] ? article[:photo] : 'https://source.unsplash.com/random' %>)">
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 item-in">
+        <div>
+          <h4><%= article[:title] %></h4>
+          <div class="seperator"></div>
+          <p>
+            <%= article[:content].split(' ').first(17).join(' ') %>...
+            (<%= article[:content].split(' ').length - 17 %> more words)
+          </p>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <% if article[:rating] %>
+              <% article[:rating].to_i.times do %>
+                <i class="fas fa-star"></i>
+              <% end %>
+              <% (5 - article[:rating].to_i).times do %>
+                <i class="far fa-star"></i>
+              <% end %>
+            <% else %>
+              <% 5.times do %>
+                <i class="far fa-star" style="color: lightgray;"></i>
+              <% end %>
+            <% end %>
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 item-in">
-            <div>
-              <h4><%= article[:title] %></h4>
-              <div class="seperator"></div>
-              <p>
-                <%= article[:content].split(' ').first(17).join(' ') %>...
-                (<%= article[:content].split(' ').length - 17 %> more words)
-              </p>
-            </div>
-            <!-- <a href="#">Read More</a> -->
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-              <div>
-                <% if article[:rating] %>
-                  <% article[:rating].to_i.times do %>
-                    <i class="fas fa-star"></i>
-                  <% end %>
-                  <% (5 - article[:rating].to_i).times do %>
-                    <i class="far fa-star"></i>
-                  <% end %>
-                <% else %>
-                  No reviews yet
-                <% end %>
-              </div>
-              <div>
-                <i class="fas fa-comments"></i>
-                <%= @comments.reverse[index].length %> <!-- COMMENTS -->
-              </div>
-            </div>
+          <div>
+            <i class="fas fa-comments"></i>
+            <%= @comments.reverse[index].length %>
           </div>
-        <a class="item-link" href="/<%= @database.length - index %>" ></a>
         </div>
       </div>
-    <% end %>
-    </div>
-    <div class="col-xs-offset-2 col-sm-3 col-sm-offset-1 col-md-2 col-md-offset-1 col-lg-2 col-lg-offset-1">
-      <h4>Latest</h4>
-      <hr>
-      <% @database.reverse.first(3).each_with_index do |article, index| %>
-        <p><a href="/<%= @database.length - index %>"><%= article[:title] %></a></p>
-      <% end %>
-      <br><br>
-      <h4>Popular</h4>
-      <hr>
-      <% @database.sort_by { |h| -h[:rating].to_i }.first(3).each do |article| %>
-        <p><a href="/<%= @database.index(article) + 1 %>"><%= article[:title] %></a></p>
-      <% end %>
+    <a class="item-link" href="/articles/<%= @articles.length - index %>" ></a>
     </div>
   </div>
+<% end %>
+
+<div class="d-flex justify-content-around">
+  <div class="pagination">
+    <a href="/">&laquo;</a>
+    <a class="active" href="/">1</a>
+    <a href="/">&raquo;</a>
+  </div>
 </div>
+
+<br>

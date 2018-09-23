@@ -1,22 +1,37 @@
-<img src="<%= @article[:photo] %>" alt="">
-<br>
-<h1><%= @article[:title] %></h1>
-<br>
-<p><%= @article[:content] %></p>
-<br><p>
-<% if @article[:rating] %>
-  <% @article[:rating].to_i.times do %>
-    <i class="fas fa-star"></i>
-  <% end %>
-  <% (5 - @article[:rating].to_i).times do %>
-    <i class="far fa-star"></i>
-  <% end %>
-<% else %>
-  No reviews yet
-<% end %></p>
-<hr>
-<h4>COMMENTS:</h4>
+<div class="item">
+  <div class="row">
+    <div class="img" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+    url(<%= @article[:photo] ? @article[:photo] : 'https://source.unsplash.com/random' %>)">
+    </div>
+    <div class="item-in">
+      <div>
+        <h4><%= @article[:title] %></h4>
+        <div class="seperator"></div>
+        <p>
+          <%= @article[:content] %>
+        </p>
+      </div>
+      <h4>Comments</h4>
+      <div class="seperator"></div>
+      <% @comments[params.fetch('id').to_i - 1].each do |comment| %>
+        <p><i class="fas fa-user-circle"></i> <i style="color: grey">"<%= comment %>"</i></p>
+      <% end %>
+      <div class="rating">
+        <% if @article[:rating] %>
+          <% @article[:rating].to_i.times do %>
+            <i class="fas fa-star"></i>
+          <% end %>
+          <% (5 - @article[:rating].to_i).times do %>
+            <i class="far fa-star"></i>
+          <% end %>
+        <% else %>
+          <% 5.times do %>
+            <i class="far fa-star"></i>
+          <% end %>
+        <% end %>
+      </div>
+      <a href="#"><i class="fas fa-share"></i></a>
+    </div>
+  </div>
+</div>
 
-<% @comments[params.fetch('id').to_i - 1].each do |comment| %>
-  <p><%= comment %></p>
-<% end %>

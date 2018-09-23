@@ -2,18 +2,15 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require_relative 'database'
 
-# get '/' do
-#   redirect '/articles'
-# end
-
 get '/' do
-  @database = DB
+  @articles = DB
   @comments = COMMENTS
   erb :home
 end
 
-get '/:id' do
-  @article = DB[params.fetch('id').to_i - 1]
+get '/articles/:id' do
+  @articles = DB
   @comments = COMMENTS
+  @article = DB[params.fetch('id').to_i - 1]
   erb :article
 end

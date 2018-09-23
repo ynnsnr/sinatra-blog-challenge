@@ -1,30 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My Way - Hand Picked Personal Impressions</title>
+    <title><%= @article ? @article[:title] : 'My Way - Blog' %></title>
     <meta charset="UTF-8">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/css/mdb.min.css" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="/stylesheets/app.css">
   </head>
   <body>
     <div class="banner">
       <div class="title container text-center">
-        <h1>MY WAY</h1>
-        <div class="seperator"></div>
-        <p>Hand picked personal impressions</p>
+        <a href="/">
+          <h1>MY WAY</h1>
+          <div class="seperator"></div>
+          <p>Hand picked personal impressions</p>
+        </a>
       </div>
-      <a class="banner-link" href="/"></a>
     </div>
-    <%= yield %>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-10 offset-xs-1 col-sm-8 offset-sm-0 col-md-9 offset-md-0 col-lg-8 offset-lg-1">
+        <%= yield %>
+        </div>
+        <div class="col-xs-8 offset-xs-2 col-sm-3 offset-sm-1 col-md-2 offset-md-1 col-lg-2 offset-lg-1 sidebar">
+          <h4>Latest</h4>
+          <hr>
+          <% @articles.reverse.first(3).each_with_index do |article, index| %>
+            <p><a href="/articles/<%= @articles.length - index %>"><%= article[:title] %></a></p>
+          <% end %>
+          <br><br>
+          <h4>Popular</h4>
+          <hr>
+          <% @articles.sort_by { |h| -h[:rating].to_i }.first(3).each do |article| %>
+            <p><a href="/articles/<%= @articles.index(article) + 1 %>"><%= article[:title] %></a></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
     <footer class="footer text-center">
       <a href="#"><i class="fab fa-facebook"></i></a>
       <a href="#"><i class="fab fa-twitter"></i></a>
